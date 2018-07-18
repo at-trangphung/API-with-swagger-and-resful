@@ -1,0 +1,28 @@
+%div
+  %h2
+    %strong Pay on Paypal
+%div
+  .row
+    .row.col-md-6.col-md-offset-3
+      = form_for @payment, url: payments_path(@payment) do |f|
+        .form-group
+          = f.label :quantity
+          = f.text_field :quantity
+        = f.submit "Pay on Paypal", type: "image",  class: "btn btn-primary btn-medium center-block", id: 'paypal_submit',  src:'https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif'
+%script{src: "https://www.paypalobjects.com/js/external/dg.js"}
+:javascript
+  $(function(){
+    var sandbox = true;
+    var submit_id = 'paypal_submit';
+    flow_config = {trigger: submit_id};
+    if (sandbox) flow_config.stage = sandbox;
+    window.paypal_flows = [];
+    window.paypal_flows.push(new PAYPAL.apps.DGFlow(flow_config));
+
+    $("#payment_customer_type_collection").click(function(){
+      $(".customer").show();
+    })
+    $("#payment_customer_type_user").click(function(){
+      $(".customer").hide();
+    })
+  });
