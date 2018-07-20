@@ -1,6 +1,10 @@
 class User::UsersController < BaseController
   layout 'customer'
-  before_action :get_user, only: %i[edit update destroy show]
+  before_action :get_user
+
+  def index
+    @users = User.all
+  end
 
   def show
     @user = User.find(params[:id])

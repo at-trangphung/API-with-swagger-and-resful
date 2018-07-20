@@ -13,10 +13,7 @@ gem 'mini_magick',             '4.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use mysql as the database for Active Record
-group :production do
-  gem "pg",             "~> 0.18"
-  gem "rails_12factor", "0.0.2"
-end
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -40,11 +37,21 @@ gem 'figaro'
 gem "cloudinary"
 gem "paypal-express"
 gem "haml"
+gem 'swagger-docs'
+gem 'active_model_serializers'
+gem 'rack-cors'
+gem 'rack-attack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  # Use RSpec for specs
+  gem 'rspec-rails', '~> 3.6'
+
+  # Use Factory Girl for generating random test data
+  gem "factory_bot_rails"
+  
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver

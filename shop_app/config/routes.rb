@@ -54,5 +54,24 @@ Rails.application.routes.draw do
       get :close_popup
     end
   end
+
+  get '/docs' => redirect('/api_html/dist/index.html?url=/apidocs/api-docs.json')
+
+  constraints subdomain: 'api' do
+    # some namespace
+  end
+
+  scope module: 'api' do
+    scope module: 'v1' do
+      # get '/' => 'home#index_public'
+    end
+    namespace :v1 do
+      get '/login' => 'users#login'
+      post '/login' => 'users#login'
+
+      resources :users
+      resources :products
+    end
+  end
 end
 
