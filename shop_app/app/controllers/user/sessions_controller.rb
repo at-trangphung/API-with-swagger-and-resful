@@ -20,6 +20,7 @@ class User::SessionsController < BaseController
   end
 
   private
+  
     def sign_in
       if @service_user.login!(@user)
         if params[:remember].to_i == 1

@@ -8,15 +8,6 @@
       "path": "/v1/users",
       "operations": [
         {
-          "parameters": [
-            {
-              "paramType": "header",
-              "name": "Authorization",
-              "type": "string",
-              "description": "Authentication token",
-              "required": false
-            }
-          ],
           "summary": "Fetches all User items",
           "notes": "This lists all the active users",
           "nickname": "Api::V1::Users#index",
@@ -207,6 +198,33 @@
             }
           ],
           "nickname": "Api::V1::Users#login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/confirm",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "Token",
+              "type": "string",
+              "description": "Activation Digest",
+              "required": true
+            }
+          ],
+          "summary": "Confirm",
+          "notes": "Confirm your User",
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Invalid username/password supplied"
+            }
+          ],
+          "nickname": "Api::V1::Users#confirm",
           "method": "post"
         }
       ]

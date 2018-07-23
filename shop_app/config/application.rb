@@ -12,6 +12,8 @@ module ShopApp
     config.load_defaults 5.1
     config.api_only = false
     config.autoload_paths << Rails.root.join('app','services')
+    config.autoload_paths << Rails.root.join('app','lib')
+
 
     # ActiveModelSerializers.config.adapter = :json_api
 
@@ -22,7 +24,7 @@ module ShopApp
       end
     end
 
-    # config.middleware.use Rack::Attack
+    config.middleware.use Rack::Attack
     # config.middleware.use ActionDispatch::Cookies
     # config.middleware.use ActionDispatch::Session::CookieStore, key: '_namespace_key'
     # Settings in config/environments/* take precedence over those specified here.

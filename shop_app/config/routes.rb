@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get 'password_resets/show'
 
     resources :sessions, only: [:create, :destroy]
-    resources :users, except: :index
+    resources :users, except: :index 
     resources :account_activations, only: :edit
     resources :password_resets, only: [:new, :create, :edit, :update]
     resources :customers
@@ -62,12 +62,9 @@ Rails.application.routes.draw do
   end
 
   scope module: 'api' do
-    scope module: 'v1' do
-      # get '/' => 'home#index_public'
-    end
     namespace :v1 do
-      get '/login' => 'users#login'
       post '/login' => 'users#login'
+      post '/confirm' => 'users#confirm'
 
       resources :users
       resources :products

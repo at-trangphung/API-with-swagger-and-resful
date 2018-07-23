@@ -21,6 +21,17 @@ class User < ApplicationRecord
   has_many :customers
   has_many :favorites, dependent: :destroy
 
+  def confirmation_token_valid?
+    self.activation_sent_at = Time.now.utc
+    (self.activation_sent_at + 30.days) > Time.now.utc
+  end
+
+  def mark_as_confirmed!
+    self.activation_digest = nil
+    self.activated_at = Time.now.utc
+    save
+  end
+
   def downcase_email
     self.email = email.downcase
   end
