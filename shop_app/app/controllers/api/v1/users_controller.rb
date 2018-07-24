@@ -1,16 +1,15 @@
 module Api::V1
   class UsersController < ApiController
     before_action :set_user, only: [:show, :update, :destroy]
-
+    before_action :authorization, only: [:index, :destroy]
     # GET /v1/users
     def index
       render json: User.all
     end
 
     def show
-      user = User.find(params[:id])
-      if user.present?
-        render json: user
+      if @user.present?
+        render json: @user
       else
         render json: { message: "User can't be found!" }
       end
@@ -28,6 +27,11 @@ module Api::V1
 
     # PATCH/PUT /users/1
     def update
+      if params[:password]
+        forget_password
+        return
+      end
+
       if @user.update(user_params)
         render json: @user
       else
@@ -35,17 +39,17 @@ module Api::V1
       end
     end
 
-    # DELETE /users/1
     def destroy
-      @user.destroy
+      logout
+      render json: {status: 'User logged successfully'}, status: :ok
     end
 
     def login
-      binding.pry
       @user = User.find_by_email(params.require(:user)[:email])
       if @user && @user.authenticate(params.require(:user)[:password])
         if @user.activated_at?
           auth_token = JsonWebToken.encode({user_id: @user.id})
+          @user.update_attribute(:remember_digest, auth_token)
           render json: {auth_token: auth_token, 'logged_in' => true}, status: :ok
         else
           render json: {error: 'Email not verified' }, status: :unauthorized
@@ -54,6 +58,7 @@ module Api::V1
         render json: {error: 'Invalid username / password'}, status: :unauthorized
       end
     end
+
 
     def confirm
       token = params[:Token].to_s
@@ -72,9 +77,21 @@ module Api::V1
         @user = User.find(params[:id])
       end
 
+      def forget_password
+        if( @user.update_attribute(:password, params[:password]) && 
+          @user.update_attribute(:password_confirmation, params[:password_confirmation]) )
+          render json: {status: 'User change password successfully'}, status: :ok
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
+      end
       # Only allow a trusted parameter "white list" through.
       def user_params
         params.require(:user).permit(:email, :password, :first_name, :last_name)
+      end
+
+      def logout
+        @user.update_attribute(:remember_digest, nil)
       end
   end
 end

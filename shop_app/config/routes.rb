@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login' => 'users#login'
       post '/confirm' => 'users#confirm'
+      get '/logout/:id' => 'users#destroy'
+      patch '/forget/:id' => 'users#update'
 
       resources :users
       resources :products

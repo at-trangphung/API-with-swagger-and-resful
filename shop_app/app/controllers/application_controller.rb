@@ -3,10 +3,12 @@ require './lib/json_web_token'
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   # Validates the token and user and sets the @current_user scope
-  # include Auth
+  
+  def authorization
+     load_current_user!
+  end
 
   def authenticate_request!
-
     if !payload || !JsonWebToken.valid_payload(payload.first)
       return invalid_authentication
     end
@@ -32,6 +34,10 @@ class ApplicationController < ActionController::Base
 
     # Sets the @current_user with the user_id from payload
     def load_current_user!
-      @current_user = User.find_by(id: payload[0]['user_id'])
+      if !payload
+        render json: {error: 'Unauthorized'}, status: :unauthorized
+      else
+        @current_user = User.find_by(id: payload[0]['user_id'])
+      end
     end
 end

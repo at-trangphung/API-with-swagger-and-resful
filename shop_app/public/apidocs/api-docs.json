@@ -4,7 +4,7 @@
   "basePath": "http://127.0.0.1:3000",
   "apis": [
     {
-      "path": "users.{format}",
+      "path": "/apidocs/api/v1/users.{format}",
       "description": "User Management"
     },
     {

@@ -14,7 +14,7 @@
               "name": "Authorization",
               "type": "string",
               "description": "Authentication token",
-              "required": false
+              "required": true
             }
           ],
           "summary": "Fetches all User items",
@@ -129,7 +129,7 @@
               "name": "id",
               "type": "integer",
               "description": "User Id",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
@@ -143,13 +143,6 @@
               "name": "user[last_name]",
               "type": "string",
               "description": "Last Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "user[email]",
-              "type": "string",
-              "description": "Email",
               "required": false
             }
           ],
@@ -208,6 +201,118 @@
           ],
           "nickname": "Api::V1::Users#login",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/confirm",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "Token",
+              "type": "string",
+              "description": "Activation Digest",
+              "required": true
+            }
+          ],
+          "summary": "Confirm",
+          "notes": "Confirm your User",
+          "responseMessages": [
+            {
+              "code": 400,
+              "responseModel": null,
+              "message": "Invalid username/password supplied"
+            }
+          ],
+          "nickname": "Api::V1::Users#confirm",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/logout/{id}",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": true
+            }
+          ],
+          "summary": "Logout",
+          "notes": "Logout your User",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Users#destroy",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/forget/{id}",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password_confirmation",
+              "type": "string",
+              "description": "Password Confirmation",
+              "required": true
+            }
+          ],
+          "summary": "Update a existed User item",
+          "notes": "Notes for updating a existed User item",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Users#update",
+          "method": "patch"
         }
       ]
     }
