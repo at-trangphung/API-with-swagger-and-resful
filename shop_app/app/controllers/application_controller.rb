@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # Validates the token and user and sets the @current_user scope
   
   def authorization
-     load_current_user!
+    load_current_user!
   end
 
   def authenticate_request!

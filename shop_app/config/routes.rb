@@ -66,10 +66,14 @@ Rails.application.routes.draw do
       post '/login' => 'users#login'
       post '/confirm' => 'users#confirm'
       get '/logout/:id' => 'users#destroy'
+      get '/history' => 'users#show'
       patch '/forget/:id' => 'users#update'
 
       resources :users
       resources :products
+      resources :category
+      resources :checkout
+      resources :transactions, controller: :checkout
     end
   end
 end

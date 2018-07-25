@@ -10,6 +10,14 @@
     {
       "path": "/apidocs/api/v1/products.{format}",
       "description": "Product Management"
+    },
+    {
+      "path": "/apidocs/api/v1/categories.{format}",
+      "description": "Category Management"
+    },
+    {
+      "path": "/apidocs/api/v1/checkout.{format}",
+      "description": "Checkout Management"
     }
   ],
   "authorizations": null

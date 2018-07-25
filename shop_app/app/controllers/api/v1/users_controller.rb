@@ -1,13 +1,24 @@
 module Api::V1
   class UsersController < ApiController
-    before_action :set_user, only: [:show, :update, :destroy]
-    before_action :authorization, only: [:index, :destroy]
+    before_action :set_user, only: [:update, :destroy]
+    before_action :authorization, only: [:index, :destroy, :show]
     # GET /v1/users
     def index
       render json: User.all
     end
 
     def show
+      if payload.present?
+        id = Customer.find_by(user_id: payload[0]['user_id'])
+        @orders = Transaction.where(customer_id: id).order(created_at: :desc)
+        render json: @orders
+        return
+      else
+       render json: { message: "Unauthorized!" }
+       return
+      end
+
+      @user = User.find(params[:id])
       if @user.present?
         render json: @user
       else
