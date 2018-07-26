@@ -70,10 +70,15 @@ Rails.application.routes.draw do
       patch '/forget/:id' => 'users#update'
 
       resources :users
-      resources :products
+      resources :products do 
+        resources :comments_product
+      end
       resources :category
       resources :checkout
       resources :transactions, controller: :checkout
+      resources :articles do 
+        resources :comments
+      end
     end
   end
 end

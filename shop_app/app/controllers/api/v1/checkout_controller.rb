@@ -56,10 +56,10 @@ module Api::V1
           @order = Order.new(order_params_api)
           @order.transaction_id = @transaction.id
           @order.save!
-          # if @new_user
-          #   UserMailer.new_user_checkout(@new_user).deliver_now
-          # end
-          # @transaction.send_check_order_email
+          if @new_user
+            UserMailer.new_user_checkout(@new_user).deliver_now
+          end
+          @transaction.send_check_order_email
         end
         @transaction
       end

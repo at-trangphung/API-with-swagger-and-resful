@@ -4,7 +4,7 @@
   "basePath": "http://127.0.0.1:3000",
   "apis": [
     {
-      "path": "/apidocs/api/users.{format}",
+      "path": "/apidocs/api/v1/users.{format}",
       "description": "User Management"
     },
     {
@@ -18,7 +18,20 @@
     {
       "path": "/apidocs/api/v1/checkout.{format}",
       "description": "Checkout Management"
+    },
+    {
+      "path": "/apidocs/api/v1/articles.{format}",
+      "description": "Articles Management"
+    },
+    {
+      "path": "/apidocs/api/v1/comments.{format}",
+      "description": "Comments Management"
+    },
+    {
+      "path": "/apidocs/api/v1/comments_product.{format}",
+      "description": "Comments Product Management"
     }
+
   ],
   "authorizations": null
 }
