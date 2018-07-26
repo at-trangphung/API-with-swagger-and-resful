@@ -315,6 +315,26 @@
           "method": "patch"
         }
       ]
+    },
+    {
+      "path": "/v1/history",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],
+          "summary": "Fetches all transactions User items",
+          "notes": "This lists all the active transactions users",
+          "nickname": "Api::V1::Users#Show",
+          "method": "get"
+        }
+      ]
     }
   ],
   "authorizations": null

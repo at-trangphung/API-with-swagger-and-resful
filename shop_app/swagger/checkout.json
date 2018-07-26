@@ -1,0 +1,181 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://127.0.0.1:3000",
+  "resourcePath": "checkout",
+  "apis": [
+    {
+      "path": "/v1/checkout",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "customer[email]",
+              "type": "string",
+              "description": "Customer Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "customer[first_name]",
+              "type": "string",
+              "description": "Customer first name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "customer[last_name]",
+              "type": "string",
+              "description": "Customer last name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "customer[address]",
+              "type": "string",
+              "description": "Customer address",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "customer[address_deliver]",
+              "type": "string",
+              "description": "Customer address deliver",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "customer[phone]",
+              "type": "integer",
+              "description": "Customer phone",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "transaction[hours]",
+              "type": "integer",
+              "description": "Transaction deliver",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "transaction[minutes]",
+              "type": "integer",
+              "description": "Transaction deliver",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "transaction[comment]",
+              "type": "string",
+              "description": "Transaction comment",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "transaction[amount]",
+              "type": "float",
+              "description": "Transaction amount",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[product_id]",
+              "type": "integer",
+              "description": "Order Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[quantity]",
+              "type": "integer",
+              "description": "Order quantity",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[total_payment]",
+              "type": "float",
+              "description": "Order total payment",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[price]",
+              "type": "float",
+              "description": "Order price",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "order[size]",
+              "type": "string",
+              "description": "Order size",
+              "required": true
+            }
+          ],
+          "summary": "Create a new Transaction item",
+          "notes": "Notes for creating a new Transaction item",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Checkout#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/checkout/{id}",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Checkout Id",
+              "required": false
+            }
+          ],
+          "summary": "Fetches checkout by id",
+          "notes": "Find checkout by id",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            },
+            {
+              "code": 500,
+              "responseModel": null,
+              "message": "Requested Range Not Satisfiable"
+            }
+          ],
+          "nickname": "Api::V1::Checkout#show",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
